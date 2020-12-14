@@ -1,0 +1,4 @@
+flask
+networkx
+psycopg2
+matplotlib
