@@ -7,11 +7,18 @@ import matplotlib.pyplot as plt
 import matplotlib
 matplotlib.use('Agg')
 
-# get env vars 
-db_host = os.environ['HEROKU_DB_HOST']
-db_name = os.environ['HEROKU_DB']
-db_user = os.environ['HEROKU_DB_USER']
-db_password = os.environ['HEROKU_DB_PASSWORD']
+if len(sys.argv[1:]) != 0 and sys.argv[1:][0] == '-d': # development flag
+    db_host = None
+    db_name = 'c19contact'
+    db_user = 'postgres'
+    db_password = '' 
+else:
+    # get env vars (production)
+    db_host = os.environ['HEROKU_DB_HOST']
+    db_name = os.environ['HEROKU_DB']
+    db_user = os.environ['HEROKU_DB_USER']
+    db_password = os.environ['HEROKU_DB_PASSWORD']
+
 
 # define initial graph
 graph = nx.Graph()
