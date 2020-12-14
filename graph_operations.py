@@ -64,19 +64,20 @@ def initialGraph():
             graph.add_node(row[0], name=row[1], age=row[2], infected=row[3], color='teal')
 
 
-    draw()
+    draw('static/img/graph0.png')
 
 
 
 # draw graph
-def draw():
+def draw(filename):
     edge_colors = list(nx.get_edge_attributes(graph,'color').values())
     node_colors = list(nx.get_node_attributes(graph,'color').values())
 
     # nx.draw_networkx(graph,font_color='black')
     nx.draw_networkx(graph, node_color=node_colors,edge_color=edge_colors, font_color='white', pos=nx.circular_layout(graph), width=2)
-    plt.savefig('./static/img/graph.png') # save graph image
+    plt.savefig(filename) # save graph image
     plt.close()
 
 
 graph.draw = draw
+graph.filehash = 0

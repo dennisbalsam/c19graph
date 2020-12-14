@@ -8,13 +8,14 @@ app = Flask(__name__)
 
 
 def updateAndDraw():
-    graph.draw()
+    graph.filehash = random.randint(1000,4000)
+    graph.draw(f'static/img/graph{graph.filehash}.png')
 
 @app.route("/")
 def index():
     initialGraph()
     resp = make_response(render_template('index.html',
-        filepath = f'static/img/graph.png',
+        filepath = f'static/img/graph{graph.filehash}.png',
         nodes = graph.nodes()))
     resp.cache_control.max_age = 0
     return resp
@@ -40,7 +41,7 @@ def toggleinfection():
     print(graph.nodes[node]['infected'])
     updateAndDraw()
     return render_template('index.html',
-        filepath = f'static/img/graph.png',
+        filepath = f'static/img/graph{graph.filehash}.png',
         nodes = graph.nodes()) 
     # return redirect(url_for('index'))
 
