@@ -1,4 +1,5 @@
 flask
-networkx
+gunicorn
 psycopg2
 matplotlib
+networkx
