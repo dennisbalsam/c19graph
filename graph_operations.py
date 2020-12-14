@@ -1,13 +1,21 @@
 import sys
 import json
+import os
 import networkx as nx
 import psycopg2
 import matplotlib.pyplot as plt
 import matplotlib
 matplotlib.use('Agg')
 
+# get env vars 
+db_host = os.environ['HEROKU_DB_HOST']
+db_name = os.environ['HEROKU_DB']
+db_user = os.environ['HEROKU_DB_USER']
+db_password = os.environ['HEROKU_DB_PASSWORD']
+
 # define initial graph
 graph = nx.Graph()
+
 
 # trace path of spread
 def tracePath(node, depth):
@@ -17,10 +25,11 @@ def tracePath(node, depth):
         graph.add_edge(node, i, color='r')
         tracePath(i, depth-1)
 
+
 # get initial data from database
 def initialGraph():
     try:
-        connection = psycopg2.connect(user = 'postgres', host = '127.0.0.1', port = '5432', database = 'c19contact')
+        connection = psycopg2.connect(database=db_name, user=db_user, password=db_password, host=db_host, port="5432")
     except (Exception) as error :
         sys.stderr.write(str(error))
         sys.exit(1)
