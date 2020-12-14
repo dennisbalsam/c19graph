@@ -15,20 +15,35 @@
     <div id="wrapper">
         <body>
             <h1>Graph Builder</h1>
-            <p>{{content}}</p>
-            <form action="/addnode" method="GET">
-                <input type="text" id="node_label" name="label" placeholder="Label">
-                <button type="submit" id="submit">Add Node</button>
-            </form>
         </br>
-        <form action="/addedge" method="GET">
-            <input type="text" id="node_label1" name="label1" placeholder="From">
-            <input type="text" id="node_label2" name="label2" placeholder="To">
-            <button type="submit" id="submit">Add Edge</button>
-        </form>
-        <img src="{{filepath}}">
+        <!-- edge adding -->
+        <form action="/addedge" method="GET" id="add_edge">
+            <select id="node_label1" name="label1" form="add_edge">
+                {% for i in nodes %}
+                    <option value="{{i}}">{{i}}</option>
+                    {%endfor%}
+                </select>
+                <select id="node_label2" name="label2" form="add_edge">
+                    {% for i in nodes %}
+                        <option value="{{i}}">{{i}}</option>
+                        {%endfor%}
+                    </select>
+                    <button type="submit" id="submit">Add Edge</button>
+                </form>
 
-    </body>
-</div>
-<!--end wrapper-->
-</html>
+        <!-- infection setting -->
+        <form action="/toggleinfection" method="GET" id="toggle_infection">
+            <select id="node_label" name="label" form="toggle_infection">
+                {% for i in nodes %}
+                    <option value="{{i}}">{{i}}</option>
+                    {%endfor%}
+                </select>
+                    <button type="submit" id="submit">Toggle Infection</button>
+                </form>
+
+                <img src="{{filepath}}">
+
+            </body>
+        </div>
+        <!--end wrapper-->
+    </html>
