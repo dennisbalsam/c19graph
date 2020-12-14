@@ -1,4 +1,0 @@
-flask
-networkx
-psycopg2-binary
-matplotlib
