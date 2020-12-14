@@ -25,12 +25,12 @@ graph = nx.Graph()
 
 
 # trace path of spread
-def tracePath(node, depth):
+def tracePath(node, depth, color):
     if depth == 0: return
     
     for i in graph.neighbors(node):
-        graph.add_edge(node, i, color='r')
-        tracePath(i, depth-1)
+        graph.add_edge(node, i, color=color)
+        tracePath(i, depth-1,color)
 
 
 # get initial data from database
@@ -59,7 +59,7 @@ def initialGraph():
     for row in people:
         if row[3] == True: # infected node
             graph.add_node(row[0], name=row[1], age=row[2], infected=row[3], color='r')
-            tracePath(row[0],2)
+            tracePath(row[0],2,'r')
         else:
             graph.add_node(row[0], name=row[1], age=row[2], infected=row[3], color='teal')
 

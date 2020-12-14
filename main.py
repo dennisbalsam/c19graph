@@ -34,11 +34,11 @@ def toggleinfection():
 
     if graph.nodes[node]['infected'] == True :
         graph.nodes[node]['color'] = 'r'
-        tracePath(node,2)
+        tracePath(node,2,'r')
     else:
         graph.nodes[node]['color'] = 'teal'
+        tracePath(node,2,'k')
 
-    print(graph.nodes[node]['infected'])
     updateAndDraw()
     return render_template('index.html',
         filepath = f'static/img/graph{graph.filehash}.png',
