@@ -3,7 +3,7 @@ import random
 import os
 import subprocess
 from graph_operations import graph, initialGraph, tracePath
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, make_response
 app = Flask(__name__)
 
 
@@ -13,9 +13,11 @@ def updateAndDraw():
 @app.route("/")
 def index():
     initialGraph()
-    return render_template('index.html',
+    resp = make_response(render_template('index.html',
         filepath = f'static/img/graph.png',
-        nodes = graph.nodes()) 
+        nodes = graph.nodes()))
+    resp.cache_control.max_age = 0
+    return resp
 
 @app.route("/addedge")
 def addedge():
