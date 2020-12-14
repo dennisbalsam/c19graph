@@ -26,7 +26,7 @@ def addnode():
 
 @app.route("/addedge")
 def addedge():
-    graph.add_edge(int(request.args.get('label1')),int(request.args.get('label2')))
+    graph.add_edge(int(request.args.get('label1')),int(request.args.get('label2')),color='k')
     updateAndDraw()
     return redirect(url_for('index'))
 
